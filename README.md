@@ -8,6 +8,27 @@ how each project's health compares, and how volume moves release over release.
 
 Serves it as a FastAPI dashboard.
 
+## What it finds
+
+Against the bundled mock JIRA — fixed seed, so these reproduce exactly:
+
+```
+45 of 240 defects came back after being closed      18.8%
+65 of 240 score below 50% on write-up quality       27.1%
+resolution_rate                                      74.2
+```
+
+```bash
+python scripts/mock_jira.py --port 8089 &
+python scripts/demo.py
+```
+
+The number that matters most is one this repository found in its own code:
+`analyzer.py` compared status against the literal string `Resolved` in seven
+places, while `defect_analyzer.py` counted `Resolved`, `Closed`, `Done` and
+`Fixed`. Same defects, same release — **74.2% resolved or 31.7%**, depending
+on which report you opened.
+
 ## Why
 
 Every team has JIRA metrics and most of them are counts. Open bugs, closed bugs,
