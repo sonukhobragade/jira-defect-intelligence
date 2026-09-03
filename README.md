@@ -8,6 +8,23 @@ how each project's health compares, and how volume moves release over release.
 
 Serves it as a FastAPI dashboard.
 
+## Why
+
+Every team has JIRA metrics and most of them are counts. Open bugs, closed bugs,
+bugs per sprint. Counts tell you the volume of work, not where quality is
+actually leaking.
+
+The questions worth answering are comparative: is this component always the one?
+Are we reopening more than we used to? Those need the defect history in one
+place and something to slice it with.
+
+Be clear about one thing this cannot answer, because it is the question most
+people want: **escape rate is not computed.** Telling a production escape from a
+defect caught in QA needs a field that says where it was found, and no such
+field exists in a default Jira. Adding it means deciding what your site records
+and mapping it — worth doing, not done here, and an earlier version of this
+README claimed it was.
+
 ## What it finds
 
 Against the bundled mock JIRA — fixed seed, so these reproduce exactly:
@@ -28,23 +45,6 @@ The number that matters most is one this repository found in its own code:
 places, while `defect_analyzer.py` counted `Resolved`, `Closed`, `Done` and
 `Fixed`. Same defects, same release — **74.2% resolved or 31.7%**, depending
 on which report you opened.
-
-## Why
-
-Every team has JIRA metrics and most of them are counts. Open bugs, closed bugs,
-bugs per sprint. Counts tell you the volume of work, not where quality is
-actually leaking.
-
-The questions worth answering are comparative: is this component always the one?
-Are we reopening more than we used to? Those need the defect history in one
-place and something to slice it with.
-
-Be clear about one thing this cannot answer, because it is the question most
-people want: **escape rate is not computed.** Telling a production escape from a
-defect caught in QA needs a field that says where it was found, and no such
-field exists in a default Jira. Adding it means deciding what your site records
-and mapping it — worth doing, not done here, and an earlier version of this
-README claimed it was.
 
 ## How it works
 
